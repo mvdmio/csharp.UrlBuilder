@@ -10,7 +10,7 @@ namespace mvdmio.csharp.UrlBuilder.Tests
       {
          var url = new Url();
 
-         url.Protocol.Should().Be(string.Empty);
+         url.Protocol.Should().Be(UrlProtocol.Undefined);
          url.Host.Should().Be(string.Empty);
          url.Path.Should().Be(string.Empty);
          url.Query.Should().Be(string.Empty);

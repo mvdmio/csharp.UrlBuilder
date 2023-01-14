@@ -2,16 +2,23 @@
 
 namespace mvdmio.csharp.UrlBuilder
 {
+   public enum UrlProtocol
+   {
+      Undefined = 0,
+      Http = 1,
+      Https = 2
+   }
+
    public class Url
    {
-      public string Protocol { get; private set; }
+      public UrlProtocol Protocol { get; private set; }
       public string Host { get; private set; }
       public string Path { get; private set; }
       public string Query { get; private set; }
 
       public Url()
       {
-         Protocol = "";
+         Protocol = UrlProtocol.Undefined;
          Host = "";
          Path = "";
          Query = "";
@@ -30,7 +37,13 @@ namespace mvdmio.csharp.UrlBuilder
          var result = new Url();
 
          var uri = new Uri(sanitizedInput);
-         result.Protocol = uri.Scheme;
+         
+         result.Protocol = uri.Scheme switch {
+            "http" => UrlProtocol.Http,
+            "https" => UrlProtocol.Https,
+            _ => UrlProtocol.Undefined
+         };
+
          result.Host = uri.Host;
          result.Path = uri.AbsolutePath.Trim('/');
          result.Query = uri.Query;
@@ -42,8 +55,8 @@ namespace mvdmio.csharp.UrlBuilder
       {
          var stringBuilder = new StringBuilder();
 
-         if (Protocol.Length > 0)
-            stringBuilder.Append($"{Protocol}://");
+         if (Protocol != UrlProtocol.Undefined)
+            stringBuilder.Append($"{Protocol.ToString().ToLower()}://");
 
          if (Host.Length > 0)
             stringBuilder.Append($"{Host}");

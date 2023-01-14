@@ -10,7 +10,7 @@ public class UrlParserTests
    {
       var url = Url.Parse("http://www.simple.com");
 
-      url.Protocol.Should().Be("http");
+      url.Protocol.Should().Be(UrlProtocol.Http);
       url.Host.Should().Be("www.simple.com");
       url.Path.Should().Be(string.Empty);
       url.Query.Should().Be(string.Empty);
