@@ -5,7 +5,14 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mvdmio.csharp.UrlBuilder", "mvdmio.csharp.UrlBuilder\mvdmio.csharp.UrlBuilder.csproj", "{7278654C-011F-465D-8CE3-F7C87701F999}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvdmio.csharp.UrlBuilder.Tests", "mvdmio.csharp.UrlBuilder.Tests\mvdmio.csharp.UrlBuilder.Tests.csproj", "{AEB6E2DD-9851-44C0-A479-E8670CB51BC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mvdmio.csharp.UrlBuilder.Tests", "mvdmio.csharp.UrlBuilder.Tests\mvdmio.csharp.UrlBuilder.Tests.csproj", "{AEB6E2DD-9851-44C0-A479-E8670CB51BC1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5745FFF8-71CE-4BC6-9491-EE64C4DD7F15}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

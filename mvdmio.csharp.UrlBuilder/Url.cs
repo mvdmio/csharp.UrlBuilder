@@ -1,37 +1,60 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
 
 namespace mvdmio.csharp.UrlBuilder
 {
    public class Url
    {
-      public string Protocol { get; }
-      public string Host { get; }
-      public string Path { get; }
-      public string Query { get; }
+      public string Protocol { get; private set; }
+      public string Host { get; private set; }
+      public string Path { get; private set; }
+      public string Query { get; private set; }
 
       public Url()
-         : this(string.Empty)
       {
-         Host = "";
          Protocol = "";
+         Host = "";
          Path = "";
          Query = "";
       }
 
-      public Url(string url)
+      public static Url Parse(string input)
       {
-         // TODO
-         //var urlRegex = "(http|https)://(.*)/(.*)?(.*)";
-         //var match = Regex.Match(url, urlRegex);
+         if (input is null)
+            throw new ArgumentNullException(nameof(input));
 
-         //var indexOfProtocolSeparator = url.IndexOf("://", StringComparison.Ordinal);
+         if (string.IsNullOrWhiteSpace(input))
+            throw new ArgumentException("Input cannot be empty", nameof(input));
 
-         //if (indexOfProtocolSeparator > 0)
-         //   Protocol = url[..url.IndexOf("://", StringComparison.Ordinal)];
+         var sanitizedInput = input.Trim(' ', '\r', '\n');
 
-         //var indexOfPathStart = url.IndexOf("/")
+         var result = new Url();
 
-         //Host = url[indexOfProtocolSeparator..]
+         var uri = new Uri(sanitizedInput);
+         result.Protocol = uri.Scheme;
+         result.Host = uri.Host;
+         result.Path = uri.AbsolutePath.Trim('/');
+         result.Query = uri.Query;
+
+         return result;
+      }
+
+      public override string ToString()
+      {
+         var stringBuilder = new StringBuilder();
+
+         if (Protocol.Length > 0)
+            stringBuilder.Append($"{Protocol}://");
+
+         if (Host.Length > 0)
+            stringBuilder.Append($"{Host}");
+
+         if (Path.Length > 0)
+            stringBuilder.Append($"/{Path}");
+
+         if (Query.Length > 0)
+            stringBuilder.Append($"{Query}");
+
+         return stringBuilder.ToString();
       }
    }
 }
